@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<link rel="stylesheet" href="font-awesome.min.css">
+
+		<style>
+			
+			@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+
+			html, body {
+				padding: 0;
+				margin: 0;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-o-user-select: none;
+				user-select: none;
+			}
+
+			i[class^=fa]:before {
+    		padding: 4px 5px;
+    		color: white;
+				background-color: cornflowerblue;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				-o-border-radius: 50%;
+				border-radius: 50%;
+			}
+			.fa-hashtag:before { padding: 4px !important; }
+
+			body {
+				width: 750px;
+				min-height: 95px;
+				position: relative;
+				word-wrap: break-word;
+				overflow-x: hidden;
+				font: .8em Arial, sans-serif;
+			}
+			
+			.fa { color: inherit; }
+
+			#loader {
+				width: 20px;
+				position: absolute;
+				display: block;
+				left: 50%;
+				top: 50%;
+				margin-left: -10px;
+				margin-top: -10px;
+			}
+
+			#content {
+				padding: 0 20px 0;
+				display: none;
+			}
+
+			section.host, 
+			section.version, 
+			section.monthly-visits, 
+			section.similar-services {
+				padding: 10px;
+			}
+
+			section.host, 
+			section.monthly-visits, 
+			section.similar-services, 
+			.tac { 
+				text-align: center; 
+			}
+			
+			.header_wrapper:after { 
+				content: ""; 
+				display: table; 
+				clear: both;
+			}
+			.header_wrapper section.host, 
+			.header_wrapper section.version {
+				display: inline-block;
+			}
+			.header_wrapper section.host { float: left; }
+			.header_wrapper section.version { 
+				float: right; 
+				font-size: 14px;
+			}
+
+			section.host a, 
+			section.host a:hover, 
+			section.host a:active, 
+			section.host a:visited {
+				color: inherit;
+			}
+
+			section.statistics, 
+			.similarweb-traffic {
+				-webkit-box-shadow: 0 0 6px #f0f0f0;
+				-moz-box-shadow: 0 0 6px #f0f0f0;
+				-o-box-shadow: 0 0 6px #f0f0f0;
+				box-shadow: 0 0 6px #f0f0f0;
+				border: 2px solid #f7f7f7;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-o-border-radius: 4px;
+				border-radius: 4px;
+			}
+			section.statistics .statistics-nums {
+				text-align: center;
+				border-bottom: 2px solid #f7f7f7;
+				padding: 5px 0;
+			}
+			section.statistics .statistics-nums > * {
+				display: inline-block;
+				padding: 0 45px;
+				border-right: 2px solid #f7f7f7;
+			}
+			section.statistics .statistics-nums > *:first-child {
+				padding-left: 0;
+			}
+			section.statistics .statistics-nums > *:last-child {
+				border-right: none;
+				padding-right: 0;
+			}
+			.statistics-nums .value-1,
+			.statistics-nums .value-2,
+			.statistics-nums .value-3,
+			.statistics-nums .value-4 {
+				font-size: 30px;
+				font-family: 'Open Sans', sans-serif;
+				font-weight: 300;
+				text-align: center;
+				color: lightsalmon;
+			}
+			.statistics-nums .value-1,
+			.statistics-nums .value-2 {
+				color: lightsalmon;
+			}
+			.statistics-nums .value-3,
+			.statistics-nums .value-4 {
+				color: skyblue;
+			}
+			.statistics-nums .text-1,
+			.statistics-nums .text-2,
+			.statistics-nums .text-3,
+			.statistics-nums .text-4 {
+				font-family: 'Open Sans', sans-serif;
+				font-weight: bold;
+				color: rgb(112, 112, 112);
+				font-size: 11px;
+			}
+
+			section.host, 
+			section.monthly-visits, 
+			section.similar-services {
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				-o-box-sizing: border-box;
+				box-sizing: border-box;
+				text-align: left;
+			}
+			section.monthly-visits, 
+			section.similar-services {
+				font-family: 'Open Sans';
+				font-weight: bold;
+				font-size: 14px;
+				color: steelblue;
+				padding: 10px 10px;
+			}
+
+			section.host:hover {
+				color: black;
+			}
+
+			section.host a {
+				text-decoration: underline;
+				text-transform: uppercase;
+				font-weight: bold;
+			}
+			
+			.statistics-top, 
+			.statistics-bottom { padding: 7px; }
+
+			.statistics-top:after {
+				content: ""; 
+				display: table; 
+				clear: both;
+			}
+
+			.statistics-bottom {
+				position: relative;
+				top: -20px;
+			}
+
+			.statistics-top > * { display: inline-block; }
+			.statistics-top-1 { float: left; }
+			.statistics-top-2 { float: right; }
+
+			.statistics-category,
+			.statistics-bounce-rate, 
+			.statistics-pages-per-visit {
+				display: inline-block;
+				font-weight: bold;
+    		color: #459cbf;
+			}
+			
+			.statistics-top-destination-sites {
+				position: relative;
+				top: 6px;
+			}
+
+			.statistics-category-value, 
+			.statistics-total-visits-value, 
+			.statistics-pages-per-visit-value, 
+			.statistics-bounce-rate-value,
+			.statistics-top-referring-sites-value,
+			.statistics-top-destination-sites-value {
+				display: inline-block;
+				padding: 5px 10px;
+				margin: 2px 4px;
+				font-size: 12px;
+				color: rgb(103, 103, 103);
+				background-color: rgb(223, 239, 255);
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				-o-border-radius: 3px;
+				border-radius: 3px;
+				font-weight: normal;
+			}
+
+			.statistics-category-value {
+				max-width: 300px;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			.statistics-top-referring-sites,
+			.statistics-top-destination-sites {
+				font-weight: bold;
+    		color: #459cbf;
+			}
+
+			#statistics-top-referring-sites-value,
+			#statistics-top-destination-sites-value {
+				display: inline;
+				position: relative;
+				top: 2px;
+			}
+
+			.statistics-top-referring-sites-value,
+			.statistics-top-destination-sites-value {
+				max-width: 78px;
+				position: relative;
+				top: 8px;
+				white-space: nowrap;
+				overflow-x: hidden;
+				text-overflow: ellipsis;
+				-webkit-transition: .3s all ease;
+				-moz-transition: .3s all ease;
+				-o-transition: .3s all ease;
+				transition: .3s all ease;
+				cursor: pointer;
+			}
+
+			.statistics-top-referring-sites-value:hover, 
+			.statistics-top-destination-sites-value:hover {
+				background-color: rgb(190, 223, 255);
+			}
+
+			.similar-service-box, 
+			.similar-service-box > * {
+				display: inline-block;
+			}
+
+			.similar-service-box > * {
+				vertical-align: middle;
+			}
+			
+			.similar-services-list {
+				position: relative;
+				left: 7px;
+				margin-bottom: 4px;
+			}
+
+			.similar-service-box {
+				max-width: 205px;
+				min-width: 205px;
+				padding: 5px 7px;
+				overflow-x: hidden;
+				margin: 3px 6px;
+				cursor: pointer;
+				background-color: #f7f7f7;
+				border: 2px solid #e4e4e4;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-o-border-radius: 4px;
+				border-radius: 4px;
+			}
+
+			.similar-service-box:nth-child(1),
+			.similar-service-box:nth-child(4) {
+				margin-left: 0;
+			}
+
+			.similar-service-box:nth-child(1),
+			.similar-service-box:nth-child(2),
+			.similar-service-box:nth-child(3) {
+				margin-top: 0;
+			}
+
+
+			.similar-service-box:hover {
+				background-color: #f7f7f7;
+			}
+
+			.external-link-wrapper { 
+				font-size: 26px;
+				margin-right: 5px; 
+			}
+
+			.external-link-wrapper > img {
+				width: 20px;
+				position: relative;
+				top: 2px;
+			}
+			
+			.similar-service-box-title, 
+			.similar-service-box-url {
+		    white-space: nowrap;
+		    overflow-x: hidden;
+		    text-overflow: ellipsis;
+		    max-width: 170px;
+		    color: rgb(103, 103, 103);
+			}
+			
+			.similar-service-box-title { font-size: 13px; }
+			.similar-service-box-url {  font-size: 12px; }
+
+			section.similarweb-traffic {
+				overflow: hidden;
+				height: 120px;
+			}
+			#similarweb-traffic {
+				position: relative;
+				top: -52px;
+			}
+			
+			footer.footer {
+				border-top: 2px solid #e6e6e6;
+				padding: 10px;
+			}
+
+			footer.footer:after {
+				content: "";
+				display: table;
+				clear: both;
+			}
+
+			footer.footer > *:first-child {
+				float: left;
+			}
+			footer.footer > *:last-child {
+				float: right;
+			}
+
+			footer.footer > * {
+				display: inline-block;
+			}
+
+			footer.footer .feedback {
+				background-color: #3a84c5;
+				padding: 8px 30px;
+				box-shadow: inset 0 0 4px rgba(0, 0, 0, .25);
+				border-radius: 3px;
+				color: white;
+				cursor: pointer;
+				border: 1px solid #6da0ce;
+				margin-left: 18px;
+			}
+			
+			.socials {
+				position: relative;
+				top: 8px;
+				margin-right: 15px;
+			}
+
+			.socials i {
+				font-size: 18px;
+				margin: 0 3px 0;
+				cursor: pointer;
+			}
+
+			.fa-facebook:before {
+				padding: 6px 10px !important;
+				background-color: #3B5998 !important;
+			}
+			.fa-vk:before {
+				padding: 6px 6px !important;
+				background-color: #45668e !important;
+			}
+			.fa-odnoklassniki:before {
+				padding: 6px 9px !important;
+				background-color: #fa8f12 !important;
+			}
+			.fa-instagram:before {
+				padding: 6px 8px !important;
+				background-color: #bc2a8d !important;
+			}
+			.fa-twitter:before {
+				padding: 6px 7px !important;
+				background-color: #00aced !important;
+			}
+		</style>
+	
+	</head>
+
+<body>
+
+	<div id="stat-information">
+		
+		<div class="loader" id="loader">
+			<?xml version="1.0" encoding="utf-8"?><svg width='20px' height='20px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-ellipsis"><circle cx="16" cy="50" r="15" fill="#94a9ce" transform="rotate(0 50 50)"><animate id="anir11" attributeName="r" from="0" to="15" begin="0s;anir14.end" dur="0.125s" fill="freeze"></animate><animate id="anir12" attributeName="r" from="15" to="15" begin="anir11.end" dur="0.625s" fill="freeze"></animate><animate id="anir13" attributeName="r" from="15" to="0" begin="anir12.end" dur="0.125s" fill="freeze"></animate><animate id="anir14" attributeName="r" from="0" to="0" begin="anir13.end" dur="0.125s" fill="freeze"></animate><animate id="anix11" attributeName="cx" from="16" to="16" begin="0s;anix18.end" dur="0.125s" fill="freeze"></animate><animate id="anix12" attributeName="cx" from="16" to="16" begin="anix11.end" dur="0.125s" fill="freeze"></animate><animate id="anix13" attributeName="cx" from="16" to="50" begin="anix12.end" dur="0.125s" fill="freeze"></animate><animate id="anix14" attributeName="cx" from="50" to="50" begin="anix13.end" dur="0.125s" fill="freeze"></animate><animate id="anix15" attributeName="cx" from="50" to="84" begin="anix14.end" dur="0.125s" fill="freeze"></animate><animate id="anix16" attributeName="cx" from="84" to="84" begin="anix15.end" dur="0.125s" fill="freeze"></animate><animate id="anix17" attributeName="cx" from="84" to="84" begin="anix16.end" dur="0.125s" fill="freeze"></animate><animate id="anix18" attributeName="cx" from="84" to="16" begin="anix17.end" dur="0.125s" fill="freeze"></animate></circle><circle cx="50" cy="50" r="15" fill="#667395" transform="rotate(0 50 50)"><animate id="anir21" attributeName="r" from="15" to="15" begin="0s;anir25.end" dur="0.5s" fill="freeze"></animate><animate id="anir22" attributeName="r" from="15" to="0" begin="anir21.end" dur="0.125s" fill="freeze"></animate><animate id="anir23" attributeName="r" from="0" to="0" begin="anir22.end" dur="0.125s" fill="freeze"></animate><animate id="anir24" attributeName="r" from="0" to="15" begin="anir23.end" dur="0.125s" fill="freeze"></animate><animate id="anir25" attributeName="r" from="15" to="15" begin="anir24.end" dur="0.125s" fill="freeze"></animate><animate id="anix21" attributeName="cx" from="16" to="50" begin="0s;anix28.end" dur="0.125s" fill="freeze"></animate><animate id="anix22" attributeName="cx" from="50" to="50" begin="anix21.end" dur="0.125s" fill="freeze"></animate><animate id="anix23" attributeName="cx" from="50" to="84" begin="anix22.end" dur="0.125s" fill="freeze"></animate><animate id="anix24" attributeName="cx" from="84" to="84" begin="anix23.end" dur="0.125s" fill="freeze"></animate><animate id="anix25" attributeName="cx" from="84" to="84" begin="anix24.end" dur="0.125s" fill="freeze"></animate><animate id="anix26" attributeName="cx" from="84" to="16" begin="anix25.end" dur="0.125s" fill="freeze"></animate><animate id="anix27" attributeName="cx" from="16" to="16" begin="anix26.end" dur="0.125s" fill="freeze"></animate><animate id="anix28" attributeName="cx" from="16" to="16" begin="anix27.end" dur="0.125s" fill="freeze"></animate></circle><circle cx="84" cy="50" r="15" fill="#94a9ce" transform="rotate(0 50 50)"><animate id="anir31" attributeName="r" from="15" to="15" begin="0s;anir35.end" dur="0.25s" fill="freeze"></animate><animate id="anir32" attributeName="r" from="15" to="0" begin="anir31.end" dur="0.125s" fill="freeze"></animate><animate id="anir33" attributeName="r" from="0" to="0" begin="anir32.end" dur="0.125s" fill="freeze"></animate><animate id="anir34" attributeName="r" from="0" to="15" begin="anir33.end" dur="0.125s" fill="freeze"></animate><animate id="anir35" attributeName="r" from="15" to="15" begin="anir34.end" dur="0.375s" fill="freeze"></animate><animate id="anix31" attributeName="cx" from="50" to="84" begin="0s;anix38.end" dur="0.125s" fill="freeze"></animate><animate id="anix32" attributeName="cx" from="84" to="84" begin="anix31.end" dur="0.125s" fill="freeze"></animate><animate id="anix33" attributeName="cx" from="84" to="84" begin="anix32.end" dur="0.125s" fill="freeze"></animate><animate id="anix34" attributeName="cx" from="84" to="16" begin="anix33.end" dur="0.125s" fill="freeze"></animate><animate id="anix35" attributeName="cx" from="16" to="16" begin="anix34.end" dur="0.125s" fill="freeze"></animate><animate id="anix36" attributeName="cx" from="16" to="16" begin="anix35.end" dur="0.125s" fill="freeze"></animate><animate id="anix37" attributeName="cx" from="16" to="50" begin="anix36.end" dur="0.125s" fill="freeze"></animate><animate id="anix38" attributeName="cx" from="50" to="50" begin="anix37.end" dur="0.125s" fill="freeze"></animate></circle><circle cx="84" cy="50" r="15" fill="#667395" transform="rotate(0 50 50)"><animate id="anir41" attributeName="r" from="15" to="0" begin="0s;anir44.end" dur="0.125s" fill="freeze"></animate><animate id="anir42" attributeName="r" from="0" to="0" begin="anir41.end" dur="0.125s" fill="freeze"></animate><animate id="anir43" attributeName="r" from="0" to="15" begin="anir42.end" dur="0.125s" fill="freeze"></animate><animate id="anir44" attributeName="r" from="15" to="15" begin="anir43.end" dur="0.625s" fill="freeze"></animate><animate id="anix41" attributeName="cx" from="84" to="84" begin="0s;anix48.end" dur="0.125s" fill="freeze"></animate><animate id="anix42" attributeName="cx" from="84" to="16" begin="anix41.end" dur="0.125s" fill="freeze"></animate><animate id="anix43" attributeName="cx" from="16" to="16" begin="anix42.end" dur="0.125s" fill="freeze"></animate><animate id="anix44" attributeName="cx" from="16" to="16" begin="anix43.end" dur="0.125s" fill="freeze"></animate><animate id="anix45" attributeName="cx" from="16" to="50" begin="anix44.end" dur="0.125s" fill="freeze"></animate><animate id="anix46" attributeName="cx" from="50" to="50" begin="anix45.end" dur="0.125s" fill="freeze"></animate><animate id="anix47" attributeName="cx" from="50" to="84" begin="anix46.end" dur="0.125s" fill="freeze"></animate><animate id="anix48" attributeName="cx" from="84" to="84" begin="anix47.end" dur="0.125s" fill="freeze"></animate></circle></svg>
+		</div>
+
+		<div class="content" id="content">
+
+			<div class="header_wrapper">
+				<section class="host" id="host">
+				</section>
+				<section class="version" id="version">
+					<span style="color: red;">V</span>stat Ver. 1.0
+				</section>
+			</div>
+			
+			<section class="statistics" id="statistics">
+				
+				<div class="statistics-nums">
+					<div class="statistics-num-1">
+						<div class="value-1">2,6B</div>
+						<div class="text-1">MONTHLY VISITORS</div>
+					</div>
+					<div class="statistics-num-2">
+						<div class="value-2">262B</div>
+						<div class="text-2">MONTHLY VIEWS</div>
+					</div>
+					<div class="statistics-num-3">
+						<div class="value-3">962M</div>
+						<div class="text-3">DAILY VISITORS</div>
+					</div>
+					<div class="statistics-num-4">
+						<div class="value-4">9,6B</div>
+						<div class="text-4">DAILY VIEWS</div>
+					</div>
+				</div>
+
+				<div class="statistics-top">
+					<div class="statistics-top-1">
+						<div class="statistics-category">
+							<i class="fa fa-hashtag"></i> 
+							Category: <div class="statistics-category-value" id="statistics-category-value"></div>
+						</div>
+					</div>
+
+					<div class="statistics-top-2">
+						<div class="statistics-total-visits" style="display: none;">
+							<i class="fa fa-user"></i>
+							Monthly auditory: <div class="statistics-total-visits-value" id="statistics-total-visits-value"></div>
+						</div>
+
+						<div class="statistics-bounce-rate">
+							<i class="fa fa-undo"></i>
+							Bounce: <div class="statistics-bounce-rate-value" id="statistics-bounce-rate-value"></div>
+						</div>
+						<div class="statistics-pages-per-visit">
+							<i class="fa fa-file-o"></i> 
+							PPV: <div class="statistics-pages-per-visit-value" id="statistics-pages-per-visit-value"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="statistics-bottom">
+					<div class="statistics-top-referring-sites">
+						<i class="fa fa-arrow-circle-right"></i> Top Referring Sites: <div id="statistics-top-referring-sites-value"></div>
+					</div>
+					<div class="statistics-top-destination-sites">
+						<i class="fa fa-arrow-circle-left"></i> Organic Keywords: <div id="statistics-top-destination-sites-value"></div>
+					</div>
+				</div>
+
+			</section>
+
+			<section class="monthly-visits" id="monthly-visits">Monthly visits for last 6 months</section>
+			
+			<section class="similarweb-traffic">
+				<div id="similarweb-traffic"></div>
+			</section>
+
+			<section class="similar-services" id="similar-services">Similar sites</section>
+
+			<section class="similar-services-list" id="similar-services-list">
+			</section>
+
+		</div>
+	
+	</div>
+	
+	<footer class="footer" id="footer">
+		<div class="feedback" id="feedback">Get Feedback</div>
+		<div class="socials">
+			<i class="fa fa-facebook" id="fa-facebook" data-href="http://google.com"></i> 
+			<i class="fa fa-vk" id="fa-vk">
+			</i> 
+			<i class="fa fa-odnoklassniki" id="fa-odnoklassniki"></i> 
+			<i class="fa fa-instagram" id="fa-instagram"></i>
+			<i class="fa fa-twitter" id="fa-twitter"></i>
+		</div>
+	</footer>
+	
+	<!-- Prevent inline script error -->
+	<script type="text/javascript" src="vstat.core.js"></script>
+
+</body>
+</html>

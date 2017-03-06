@@ -1,0 +1,24 @@
+﻿{
+	"manifest_version": 2,
+	"name": "Vstat",
+	"version": "1.0",
+	"description": "Shows visit statistics of a service",
+	
+	"icons": {"16": "icon.png", "128": "icon.png"},
+
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_title": "Shows visit statistics of a service",
+		"default_popup": "popup.html"
+	},
+
+	"permissions": [
+		"tabs",
+		"http://vstat.hobot.ru/*",
+		"https://widget.similarweb.com/*",
+		"https://www.similarweb.com/website/*",
+		"http://www.similarsitesearch.com/alternatives-to/*"
+  ],
+
+  "background": { "scripts": ["vstat.tools.js", "vstat.similarwebParser.js", "vstat.similarsitesearchParser.js", "vstat.visitsPublisher.js", "vstat.background.js"] }
+}
